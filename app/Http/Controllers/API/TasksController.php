@@ -45,7 +45,7 @@ class TasksController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,completed,in-progress',
+            'status' => 'required|in:not-started,completed,in-progress,on-hold',
         ]);
 
         try {
@@ -57,16 +57,20 @@ class TasksController extends Controller
                 'message' => 'Task status updated successfully',
                 'task' => new TaskResource($task)
             ], 200);
-
         } catch (ModelNotFoundException $e) {
             return response()->json(['error' => 'Task not found'], 404);
         }
     }
 
-    public function destroy(Task $task)
+    public function destroy($id)
     {
         // Delete the task
-        $task->delete();
-        return response()->json(['message' => 'Task deleted successfully'], 200);
+        try {
+            $task = Task::findOrFail($id);
+            $task->delete();
+            return response()->json(['message' => 'Task deleted successfully'], 200);
+        } catch (ModelNotFoundException $e) {
+            return response()->json(['error' => 'Task not found'], 404);
+        }
     }
 }

@@ -15,6 +15,9 @@ $ npm install
 # migrate database using sqlite
 $ php artisan migrate
 
+# Optional: Seeding the database
+$ php artisan db:seed
+
 
 # install vite server for front end
 $ npm run dev

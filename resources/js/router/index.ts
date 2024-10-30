@@ -1,15 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import WelcomePage from '../pages/WelcomePage.vue'
-import TasksList from '../pages/TasksList.vue'
-import TaskDetail from '../pages/TaskDetail.vue'
-import TaskForm from '../pages/TaskForm.vue'
+import HomePage from '../pages/HomePage.vue'
 
 const routes = [
-    { path: '/', component: WelcomePage },
-    { path: '/tasks', component: TasksList },
-    { path: '/tasks/:id', component: TaskDetail },
-    { path: '/task/form', component: TaskForm },
+    { path: '/', component: HomePage },
 ]
 
 const router = createRouter({
