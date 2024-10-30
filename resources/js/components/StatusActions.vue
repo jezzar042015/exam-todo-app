@@ -24,10 +24,9 @@
     </teleport>
 
     <teleport to='#app'>
-        <Confirmation :confirm-button="true" :confirm-display="'Delete'" :cancel-button="true"
-            :cancel-display="'Cancel'" :title="'Confirm Deletion'"
-            :message="'Are you sure to premanently delete this task?'" v-if="showConfirmation"
-            @confirm="confirmedDelete" @close-me="showConfirmation = false" />
+        <Confirmation :title="'Confirm Deletion'" :message="'Are you sure to premanently delete this task?'"
+            :confirm-display="'Delete'" v-if="showConfirmation" @confirm="confirmedDelete"
+            @close-me="showConfirmation = false" />
     </teleport>
 </template>
 
@@ -56,13 +55,13 @@
         showForm.value = false
     }
 
-    const saveUpdates = async (task: Task, statusDisplay: string) => {
+    const saveUpdates = async (task: Task) => {
         if (taskStore.selected) {
             taskStore.selected.title = task.title
             taskStore.selected.description = task.description
             taskStore.selected.status = task.status
             task.id = taskStore.selected.id
-            await taskStore.update(task)
+            taskStore.update(task)
         }
 
         showForm.value = false

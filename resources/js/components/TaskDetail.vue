@@ -42,7 +42,7 @@
     import { useTasksStore } from '../stores/tasks';
     import StatusChip from './StatusChip.vue';
     import StatusActions from './StatusActions.vue';
-    import NonSelected from './NonSelected.vue';
+    import NonSelected from './alerts/NonSelected.vue';
 
     const taskStore = useTasksStore()
 </script>

@@ -20,8 +20,8 @@
                     <div class="flex flex-col gap-3">
                         <label for="task-title" class="text-white/55">Status</label>
                         <div class="flex gap-2">
-                            <button v-for="status in taskStore.statusOptions" :key="status.value" @click="setStatus(status.value)"
-                                :class="setStatusClass(status.value)">
+                            <button v-for="status in taskStore.statusOptions" :key="status.value"
+                                @click="setStatus(status.value)" :class="setStatusClass(status.value)">
                                 <div class="flex justify-center gap-3">
                                     <span> {{ status.display }} </span>
                                 </div>
@@ -61,8 +61,6 @@
     })
 
     // status handling
-
-
     const setStatus = (status: StatusOptions) => {
         model.value.status = status
     }
@@ -72,6 +70,7 @@
             (model.value.status === status ? '' : 'opacity-20');
     };
 
+    // model used for form binding
     const model = ref<
         Omit<Task, 'id' | 'statusDisplay' | 'created_at' | 'updated_at'>
     >({
@@ -80,7 +79,7 @@
         status: 'not-started',
     })
 
-    const validConfirm = computed(()=> {
+    const validConfirm = computed(() => {
         return model.value.title.length > 0
     })
 
@@ -89,10 +88,10 @@
     }
 
     onMounted(() => {
-        if (mode == 'update') {
-            model.value.title = taskStore.selected?.title ?? ''
-            model.value.description = taskStore.selected?.description ?? ''
-            model.value.status = taskStore.selected?.status ?? 'in-progress'
+        if (mode == 'update' && taskStore.selected) {
+            model.value.title = taskStore.selected.title
+            model.value.description = taskStore.selected.description
+            model.value.status = taskStore.selected.status ?? 'in-progress'
         }
     })
 

@@ -30,8 +30,8 @@
     import ModalBackground from './ModalBackground.vue';
 
     const {
-        title = null,
-        message = null,
+        title,
+        message,
         confirmButton = true,
         confirmDisplay = "Confirm",
         cancelButton = true,
@@ -39,10 +39,10 @@
     } = defineProps<{
         title: string | null
         message: string | null
-        confirmButton: boolean
-        confirmDisplay: string | null
-        cancelButton: boolean
-        cancelDisplay: string | null
+        confirmButton?: boolean
+        confirmDisplay?: string | null
+        cancelButton?: boolean
+        cancelDisplay?: string | null
     }>()
 
     const emits = defineEmits(['confirm', 'close-me'])

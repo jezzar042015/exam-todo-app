@@ -1,10 +1,12 @@
 <template>
     <div ref="scrollContainer" class="task-list">
         <div class="py-2 text-white/60">{{ label }} &bullet; {{ tasks.length }}</div>
-        <div class="flex flex-col gap-2">
-            <template v-for="task in visibleTasks" :key="task.id">
-                <TaskListItem :task="task" @click="emits('set-selected', task)" />
-            </template>
+        <div>
+            <TransitionGroup name="list" tag="div" class="flex flex-col gap-2">
+                <template v-for="task in visibleTasks" :key="task.id">
+                    <TaskListItem :task="task" @click="emits('set-selected', task)" />
+                </template>
+            </TransitionGroup>
         </div>
     </div>
 </template>
@@ -22,25 +24,34 @@
 
     const emits = defineEmits(['set-selected']);
 
-    // Set up the scroll container reference
     const scrollContainer = ref(null);
 
-    // Set the number of tasks initially visible
     const visibleCount = ref(10);
 
-    // Computed property for the currently visible tasks
     const visibleTasks = computed(() => tasks.slice(0, visibleCount.value));
 
-    // Load more tasks when reaching the end of the scrollable container
     const loadMoreTasks = () => {
-        // Increase visible count by 10 or any number you prefer
         visibleCount.value += 10;
     };
 
-    // Set up infinite scroll on the scroll container
     useInfiniteScroll(scrollContainer, loadMoreTasks, {
-        distance: 50, // Trigger when 50px from the bottom
+        distance: 50,
     });
 
 </script>
 
+<style scoped>
+
+    .list-enter-active,
+    .list-leave-active
+    {
+        transition: all 0.2s ease;
+    }
+
+    .list-enter-from,
+    .list-leave-to
+    {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+</style>
