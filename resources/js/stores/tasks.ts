@@ -17,7 +17,7 @@ export const useTasksStore = defineStore('tasks', () => {
         }
     };
 
-    const create = async (task: Omit<Task, 'id'>) => {
+    const create = async (task: Omit<Task, 'id' | 'created_at' | 'updated_at'>) => {
         try {
             const response = await post('/tasks', task);
             tasks.value.push(response.data);
