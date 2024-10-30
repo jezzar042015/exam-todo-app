@@ -1,9 +1,13 @@
 <template>
-    <router-view ></router-view>
+    <div>
+        Welcome
+    </div>
 </template>
 
 <script setup lang="ts">
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
