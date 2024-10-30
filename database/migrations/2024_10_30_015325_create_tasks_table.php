@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->text("description");
+            $table->text("description")->nullable();
             $table->enum("status", [
                 'not-started',
                 'in-progress',
                 'completed',
                 'on-hold',
-            ]);
+            ])->default('not-started');
             $table->timestamps();
         });
     }

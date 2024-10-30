@@ -13,5 +13,15 @@ class Task extends Model
         'status',
     ];
 
-    
+    public function getStatusDisplayAttribute (){
+        
+        $statuses = [
+                'not-started' => 'Not Started',
+                'in-progress' => 'In Progress',
+                'completed' => 'Completed',
+                'on-hold' => 'On Hold',
+        ];
+
+        return $statuses[$this->status] ?? null;
+    }
 }
